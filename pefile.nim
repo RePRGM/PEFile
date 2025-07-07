@@ -1,4 +1,4 @@
-## peparser.nim - Cross-platform PE file parser library for Nim
+## pefile.nim - Cross-platform PE file parser library for Nim
 
 import streams, tables, strutils, sequtils, os, times, endians
 
