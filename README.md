@@ -30,24 +30,24 @@ A cross-platform library for parsing and manipulating Windows PE (Portable Execu
 
 ## Installation
 
-Simply save the `peparser.nim` file to your project directory. No package manager installation is required as the library has no external dependencies.
+Simply save the `pefile.nim` file to your project directory. No package manager installation is required as the library has no external dependencies.
 
 ```bash
 # Download the library
-wget https://your-repo/peparser.nim
+wget https://www.github.com/RePRGM/PEFile/pefile.nim
 
 # Or copy it to your project
-cp /path/to/peparser.nim ./
+cp /path/to/pefile.nim ./
 ```
 
 ## Compilation
 
 ### As a Library
 
-When using peparser in your project, simply import it:
+When using pefile in your project, simply import it:
 
 ```nim
-import peparser
+import pefile
 
 # Your code here
 ```
@@ -64,19 +64,19 @@ To compile the library with its built-in examples:
 
 ```bash
 # Debug build
-nim c peparser.nim
+nim c -o="pefile" --cpu:amd64 pefile.nim
 
 # Release build (optimized)
-nim c -d:release peparser.nim
+nim c -d:release --cpu:amd64 -o="pefile" pefile.nim
 
 # Cross-compile for Windows from Linux
-nim c -d:mingw peparser.nim
+nim c -d:mingw --cpu:amd64 -o="pefile" pefile.nim
 ```
 
 ## Quick Start
 
 ```nim
-import peparser
+import pefile
 
 # Load a PE file
 let pe = loadPEFile("program.exe")
@@ -261,7 +261,7 @@ Get a specific data directory entry by index.
 ### Example 1: Basic PE Analysis
 
 ```nim
-import peparser
+import pefile
 
 let pe = loadPEFile("notepad.exe")
 
@@ -283,7 +283,7 @@ for section in pe.sections:
 ### Example 2: Import Analysis
 
 ```nim
-import peparser, tables
+import pefile, tables
 
 let pe = loadPEFile("application.exe")
 
@@ -308,7 +308,7 @@ if pe.hasImport("user32.dll"):
 ### Example 3: Export Analysis (for DLLs)
 
 ```nim
-import peparser
+import pefile
 
 let pe = loadPEFile("library.dll")
 
@@ -332,7 +332,7 @@ else:
 ### Example 4: Section Analysis and Modification
 
 ```nim
-import peparser
+import pefile
 
 let pe = loadPEFile("target.exe")
 
@@ -366,7 +366,7 @@ for i, b in entryBytes:
 ### Example 5: PE File Modification
 
 ```nim
-import peparser
+import pefile
 
 # Load original file
 let pe = loadPEFile("original.exe")
@@ -399,7 +399,7 @@ for b in newBytes:
 ### Example 6: Advanced Analysis
 
 ```nim
-import peparser, strutils
+import pefile, strutils
 
 let pe = loadPEFile("complex.exe")
 
@@ -459,7 +459,7 @@ echo "  Total sections: ", pe.sections.len
 ### Example 7: Quick One-Liners
 
 ```nim
-import peparser
+import pefile
 
 # Check if file is 64-bit
 echo loadPEFile("test.exe").is64bit
@@ -484,7 +484,7 @@ echo loadPEFile("test.exe").getMachineType()
 You can build custom analysis tools using the library:
 
 ```nim
-import peparser, tables, algorithm
+import pefile, tables, algorithm
 
 proc analyzeImportComplexity(pe: PEFile): int =
   ## Calculate import complexity score
@@ -522,7 +522,7 @@ if suspicious.len > 0:
 Process multiple PE files:
 
 ```nim
-import peparser, os, strutils
+import pefile, os, strutils
 
 proc processDirectory(dir: string) =
   for kind, path in walkDir(dir):
@@ -604,8 +604,8 @@ for section in pe.sections:
 ```
 
 ```nim
-# Nim peparser
-import peparser
+# Nim pefile
+import pefile
 let pe = loadPEFile("file.exe")
 echo pe.getMachineType()
 echo pe.getImageBase()
