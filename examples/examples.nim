@@ -1,4 +1,4 @@
-import peparser
+import pefile
 
 # Example 1: Basic PE file analysis
 proc analyzeBasic() =
